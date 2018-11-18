@@ -2,49 +2,49 @@ import RPi.GPIO as GPIO
 import time
 from pynput import keyboard
 from pynput.keyboard import Listener
-from inputs import devices
 
 #init variables
 msPerCycle = 1000/50
-fullStick = 2.5
-deadStick = 0.5
-GPIO.setmode(GPIO.BOARD)
+fullStick = 2.5 #100 percent power
+deadStick = 0.5 #zero percent power
+GPIO.setmode(GPIO.BOARD) #init GPIO packaged to reference board pins.
 GPIO.setwarnings(False)
-GPIO.setup(7, GPIO.OUT)
-l = GPIO.PWM(7, 50)
-GPIO.setup(40, GPIO.OUT)
-r = GPIO.PWM(40, 50)
+GPIO.setup(7, GPIO.OUT) #init pin 7 as output pin
+l = GPIO.PWM(7, 50) #begin PWM signal at 50Hz
+GPIO.setup(40, GPIO.OUT) #init PWM signal at 50Hz
+r = GPIO.PWM(40, 50) #begin PWM signal at 50Hz
 
 #begin tank at idle
-dutyCyclePercentage = deadStick * 100/msPerCycle
-l.start(dutyCyclePercentage)
-dutyCyclePercentage = deadStick * 100/msPerCycle
-r.start(dutyCyclePercentage)
+dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero pwoer
+l.start(dutyCyclePercentage) #left tread, zero power
+dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero power
+r.start(dutyCyclePercentage) #right tread, zero power
 
-def leftTreadOn():
+def leftTreadOn(): #activated the left tread, in future will take argument for percentage throttle
     dutyCyclePercentage = fullStick * 100/msPerCycle
     l.start(dutyCyclePercentage)
-def rightTreadOn():
+def rightTreadOn(): #activated the right tread, in future will take argument for percentage throttle
     dutyCyclePercentage = fullStick * 100/msPerCycle
     r.start(dutyCyclePercentage)
     
-def leftTreadOff():
+def leftTreadOff(): #deactivated the left tread, in future will take argument for percentage throttle
     dutyCyclePercentage = deadStick * 100/msPerCycle
     l.start(dutyCyclePercentage)
-def rightTreadOff():
+def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
     dutyCyclePercentage = deadStick * 100/msPerCycle
     r.start(dutyCyclePercentage)
 
 
-def on_press(key):
-    if key == keyboard.Key.left:
-        print("left")
+def on_press(key): #onpress key handler
+    
+    if key == keyboard.Key.left: #!reassign to WASD
+        #print("a")
         leftTreadOn()
     if key == keyboard.Key.right:
-        print("right")
+        print("d")
         rightTreadOn()
         
-def on_release(key):
+def on_release(key): #onrelease key handler
     #print("{0} I ".format(str(key)))
     if key == keyboard.Key.left:
         print("left")
@@ -62,7 +62,7 @@ def on_release(key):
 
 
 try:
-    with Listener(
+    with Listener( #activate listener
         on_press=on_press,
         on_release=on_release) as listener:
         listener.join()
@@ -72,7 +72,7 @@ try:
         
 
     
-except KeyboardInterrupt:
+except KeyboardInterrupt: #break out of infinite loop
     p.stop()
     GPIO.cleanup()
     print("done")
