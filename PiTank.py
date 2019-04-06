@@ -52,11 +52,11 @@ def rightTreadOff(): #deactivated the right tread, in future will take argument 
 while True:
     #recieve data stream
     data = conn.recv(1024).decode()
-    chanArray = csv.reader(data)
-    leftTreadChan = chanArray.index(0)
-    rightTreadChan = chanArray.index(1)
-    print(leftTreadChan + "    " + rightTreadChan)
-	
+    #chanArray = csv.reader(data)
+    #leftTreadChan = chanArray.index(0)
+    #rightTreadChan = chanArray.index(1)
+    #print(leftTreadChan + "    " + rightTreadChan)
+    print(data)
     if not data:
         break
         
