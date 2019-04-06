@@ -54,7 +54,7 @@ while True:
     data = conn.recv(1024).decode()
     
 
-    chanArray = string.split("/")
+    chanArray = data.split("/")
     print(chanArray)
     #leftTreadChan = chanArray.index(0)
     #rightTreadChan = chanArray.index(1)
