@@ -4,7 +4,6 @@ def server_program():
     #get host name
     host = ''
     port = 5555 #init port
-    x = 0
     server_socket = socket.socket() #get instance
     server_socket.bind((host, port)) #bind host adress and port together
     

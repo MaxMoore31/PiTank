@@ -6,7 +6,6 @@ import socket
 import csv
 
 #init server code
- #get host name
 host = ''
 port = 5555 #init port
 server_socket = socket.socket() #get instance
@@ -15,6 +14,7 @@ server_socket.bind((host, port)) #bind host adress and port together
 #config how many clients at one time
 server_socket.listen(2)
 conn, address = server_socket.accept() #accept new conn
+print("connection from: " + str(address))
 
 #init variables
 msPerCycle = 1000/50
@@ -56,6 +56,7 @@ while True:
     leftTreadChan = chanArray.index(0)
     rightTreadChan = chanArray.index(1)
     print(leftTreadChan + "    " + rightTreadChan)
+	
     if not data:
         break
         
