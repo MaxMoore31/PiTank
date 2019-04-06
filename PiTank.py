@@ -55,7 +55,7 @@ while True:
     
 
     chanArray = string.split("/")
-	print(chanArray)
+    print(chanArray)
     #leftTreadChan = chanArray.index(0)
     #rightTreadChan = chanArray.index(1)
     #print(leftTreadChan + "    " + rightTreadChan)
