@@ -49,14 +49,15 @@ def rightTreadOff(): #deactivated the right tread, in future will take argument 
     
 def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
     control = 0.5
-    input = input/100
+    
+    input = (input*2)/100
     control = control + input
     print(control)
     dutyCyclePercentage = control * 100/msPerCycle
     l.start(dutyCyclePercentage)
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
-    input = input/100
+    input = (input*2)/100
     control = control + input
     dutyCyclePercentage = control * 100/msPerCycle
     r.start(dutyCyclePercentage)
