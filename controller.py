@@ -57,7 +57,7 @@ textPrint = TextPrint()
 
 #init client sender
 print('enter host IP')
-host = input() 
+host = '192.168.191.37'
 port = 5555
     
 client_socket = socket.socket() #instantiate
@@ -112,7 +112,7 @@ while done==False:
             textPrint.print(screen, "Axis {} value: {:>6.3f}".format(i, axis) )
 
         textPrint.unindent()
-
+        buttons = joystick.get_numbuttons()
         leftTread = joystick.get_axis(2)
         rightTread = joystick.get_axis(5)
         #ch0 = int(abs(throttle * 100))
@@ -121,28 +121,31 @@ while done==False:
         ch1 = int(((rightTread +1)/2)*100)
         
         #print("ch0: ",ch0, "ch1: ",ch1)
-        ch0 = str(ch0)
-        ch1 = str(ch1)
+        ch2 = 50
+        ch3 = 0
         for i in range( buttons ):
             button = joystick.get_button( i )
-            if(i == 3 and button ==1):
-                ch3 = str(100)
-            else:
-                ch3 = str(0)
-                
-            ch2 = str(50)
-             if(i == 4 and button ==1):
-                ch2 = str(0)
+            if(i == 1 and button ==1):
+                ch3 = int(100)
+            if(i == 4 and button ==1):
+                ch2 = int(0)
             if(i == 5 and button ==1):
-                ch2 = str(100)
+                ch2 = int(100)
 
+        ch0 = str(ch0)
+        ch1 = str(ch1)
+        ch2 = str(ch2)
+        ch3 = str(ch3)
+        ch4 = str(ch4)
+        ch5 = str(ch5)
+        
         message = str(ch0 + '/' + ch1 + '/' + ch2 + '/' + ch3 + '/' + ch4 + '/' + ch5)
 
         client_socket.send(message.encode()) #send message
         data = client_socket.recv(1024).decode() #receive response
  
             
-        buttons = joystick.get_numbuttons()
+
         textPrint.print(screen, "Number of buttons: {}".format(buttons) )
         textPrint.indent()
 
