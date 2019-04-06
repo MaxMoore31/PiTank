@@ -55,7 +55,7 @@ while True:
     chanArray = csv.reader(data)
     leftTreadChan = chanArray.index(0)
     rightTreadChan = chanArray.index(1)
-	print(leftTreadChan + "    " + rightTreadChan)
+    print(leftTreadChan + "    " + rightTreadChan)
     if not data:
         break
         
