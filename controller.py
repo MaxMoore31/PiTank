@@ -123,7 +123,7 @@ while done==False:
         #print("ch0: ",ch0, "ch1: ",ch1)
         ch0 = str(ch0)
         ch1 = str(ch1)
-        message = str(ch0 + ',' + ch1)
+        message = str(ch0 + '/' + ch1)
 
         client_socket.send(message.encode()) #send message
         data = client_socket.recv(1024).decode() #receive response
