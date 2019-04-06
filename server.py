@@ -20,9 +20,10 @@ def server_program():
 			
 		print("from connected user: " + str(data))
 	
-		data = x
+		str(y) = x
+		data = y
 		conn.send(data.encode())
-		x++
+		x = x+1
 	conn.close()
 	
 if __name__ == '__main__':
