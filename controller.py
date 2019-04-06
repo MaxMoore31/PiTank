@@ -55,6 +55,14 @@ pygame.joystick.init()
 # Get ready to print
 textPrint = TextPrint()
 
+#init client sender
+print('enter host IP')
+host = ''
+port = 5555
+    
+client_socket = socket.socket() #instantiate
+client_socket.connect((host, port)) #connect to the server
+
 # -------- Main Program Loop -----------
 while done==False:
     # EVENT PROCESSING STEP
@@ -105,17 +113,18 @@ while done==False:
 
         textPrint.unindent()
 
-        throttle = joystick.get_axis( 2 )
-        turninput = joystick.get_axis(0)
-        ch0 = int(abs(throttle * 100))
-        ch1 = int(abs(throttle * 100))
+        leftTread = joystick.get_axis(2)
+        rightTread = joystick.get_axis(5)
+        #ch0 = int(abs(throttle * 100))
+        #ch1 = int(abs(throttle * 100))
+        ch0 = int(((leftTread +1)/2)*100)
+        ch1 = int(((rightTread +1)/2)*100)
         
-
-        if turninput < 0: #turning left
-            ch0 = abs(ch0 - int(abs(turninput * 100)))
-        if turninput > 0: #turning right
-            ch1 = abs(ch1 - int(abs(turninput * 100)))
         print("ch0: ",ch0, "ch1: ",ch1)
+        message = str(ch0 + ',' + ch1)
+
+        client_socket.send(message.encode()) #send message
+        data = client_socket.recv(1024).decode() #receive response
  
             
         buttons = joystick.get_numbuttons()
@@ -156,4 +165,6 @@ while done==False:
 # Close the window and quit.
 # If you forget this line, the program will 'hang'
 # on exit if running from IDLE.
+#close socket connection
+client_socket.close()
 pygame.quit ()
