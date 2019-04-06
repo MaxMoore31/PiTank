@@ -70,8 +70,8 @@ while True:
 
     chanArray = data.split("/")
     print(chanArray)
-    leftTreadChan = chanArray[0]
-    rightTreadChan = chanArray[1]
+    leftTreadChan = float(chanArray[0])
+    rightTreadChan = float(chanArray[1])
     
     leftTreadControl(leftTreadChan)
     rightTreadControl(rightTreadChan)
