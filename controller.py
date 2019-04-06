@@ -1,4 +1,5 @@
 import pygame
+import socket
 
 # Define some colors
 BLACK    = (   0,   0,   0)
@@ -57,7 +58,7 @@ textPrint = TextPrint()
 
 #init client sender
 print('enter host IP')
-host = ''
+host = input() 
 port = 5555
     
 client_socket = socket.socket() #instantiate
@@ -120,8 +121,10 @@ while done==False:
         ch0 = int(((leftTread +1)/2)*100)
         ch1 = int(((rightTread +1)/2)*100)
         
-        print("ch0: ",ch0, "ch1: ",ch1)
-        message = str(ch0 + ',' + ch1)
+        #print("ch0: ",ch0, "ch1: ",ch1)
+        ch0 = str(ch0)
+        ch1 = str(ch1)
+        message = ch0 + ',' + ch1
 
         client_socket.send(message.encode()) #send message
         data = client_socket.recv(1024).decode() #receive response
