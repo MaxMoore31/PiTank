@@ -46,7 +46,21 @@ def leftTreadOff(): #deactivated the left tread, in future will take argument fo
 def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
     dutyCyclePercentage = deadStick * 100/msPerCycle
     r.start(dutyCyclePercentage)
-
+    
+def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
+    control = 0.5
+    input = input/100
+    control = control + input
+    print(control)
+    dutyCyclePercentage = control * 100/msPerCycle
+    l.start(dutyCyclePercentage)
+def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
+    control = 0.5
+    input = input/100
+    control = control + input
+    dutyCyclePercentage = control * 100/msPerCycle
+    r.start(dutyCyclePercentage)
+    
 
 
 while True:
@@ -57,9 +71,11 @@ while True:
     chanArray = data.split("/")
     print(chanArray)
     leftTreadChan = chanArray[0]
-    rightTreadChan = chanArray[0]
-    print(leftTreadChan + "    " + rightTreadChan)
+    rightTreadChan = chanArray[1]
     
+    leftTreadControl(leftTreadChan)
+    rightTreadControl(rightTreadChan)
+
     if not data:
         break
     data = 'ACK'

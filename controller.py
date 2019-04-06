@@ -41,7 +41,7 @@ ch5 = 0
 size = [500, 700]
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Pi Tank Driver")
 
 #Loop until the user clicks the close button.
 done = False
