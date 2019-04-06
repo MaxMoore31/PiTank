@@ -1,28 +1,30 @@
 import socket
-import threading
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('0.0.0.0',5000))
-sock.listen(1)
-
-connections = []
-
-def handler(c, a):
-    global connections
-    while True:
-        data = c.recv(1024)
-        for connection in connections:
-            connection.send(bytes(data))
-        if not data:
-            connections.remove(c)
-            c.close()
-            break
-
-while True:
-    c,a = sock.accept()
-    cThread = threading.Thread(target = handler, args=(c,a))
-    cThread.daemon = True
-    cThread.start()
-    connections.append(c)
-    print(connections)
-    
+def server_program():
+	#get host name
+	host = ''
+	port = 5555 #init port
+	x = 0
+	server_socket = socket.socket() #get instance
+	server_socket.bind((host, port)) #bind host adress and port together
+	
+	#config how many clients at one time
+	server_socket.listen(2)
+	conn, address = server_socket.accept() #accept new conn
+	print("connection from: " + str(address))
+	while True:
+		#recieve data stream
+		data = conn.recv(1024).decode()
+		if not data:
+			break
+			
+		print("from connected user: " + str(data))
+	
+		data = x
+		conn.send(data.encode())
+		x++
+	conn.close()
+	
+if __name__ == '__main__':
+	server_program()
+	
