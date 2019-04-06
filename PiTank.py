@@ -2,6 +2,19 @@ import RPi.GPIO as GPIO
 import time
 from pynput import keyboard
 from pynput.keyboard import Listener
+import socket
+import csv
+
+#init server code
+ #get host name
+host = ''
+port = 5555 #init port
+server_socket = socket.socket() #get instance
+server_socket.bind((host, port)) #bind host adress and port together
+
+#config how many clients at one time
+server_socket.listen(2)
+conn, address = server_socket.accept() #accept new conn
 
 #init variables
 msPerCycle = 1000/50
@@ -35,23 +48,39 @@ def rightTreadOff(): #deactivated the right tread, in future will take argument 
     r.start(dutyCyclePercentage)
 
 
-def on_press(key): #onpress key handler
-    
-    if key == keyboard.Key.left: #!reassign to WASD
-        #print("a")
-        leftTreadOn()
-    if key == keyboard.Key.right:
-        print("d")
-        rightTreadOn()
+
+while True:
+    #recieve data stream
+    data = conn.recv(1024).decode()
+    chanArray = csv.reader(data)
+    leftTreadChan = chanArray.index(0)
+    rightTreadChan = chanArray.index(1)
+    if not data:
+        break
         
-def on_release(key): #onrelease key handler
-    #print("{0} I ".format(str(key)))
-    if key == keyboard.Key.left:
-        print("left")
-        leftTreadOff()
-    if key == keyboard.Key.right:
-        print("right")
-        rightTreadOff()
+    print("from connected user: " + str(data))
+    data = 'ACK'
+    conn.send(data.encode())
+    
+conn.close()
+
+# def on_press(key): #onpress key handler
+    
+    # if key == keyboard.Key.left: #!reassign to WASD
+        # #print("a")
+        # leftTreadOn()
+    # if key == keyboard.Key.right:
+        # print("d")
+        # rightTreadOn()
+        
+# def on_release(key): #onrelease key handler
+    # #print("{0} I ".format(str(key)))
+    # if key == keyboard.Key.left:
+        # print("left")
+        # leftTreadOff()
+    # if key == keyboard.Key.right:
+        # print("right")
+        # rightTreadOff()
 
 
 

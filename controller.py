@@ -28,8 +28,7 @@ class TextPrint:
         
     def unindent(self):
         self.x -= 10
-    
-
+        
 pygame.init()
 ch0 = 0
 ch1 = 0
