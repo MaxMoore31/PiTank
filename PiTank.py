@@ -56,9 +56,9 @@ while True:
 
     chanArray = data.split("/")
     print(chanArray)
-    #leftTreadChan = chanArray.index(0)
-    #rightTreadChan = chanArray.index(1)
-    #print(leftTreadChan + "    " + rightTreadChan)
+    leftTreadChan = chanArray[0]
+    rightTreadChan = chanArray[0]
+    print(leftTreadChan + "    " + rightTreadChan)
     
     if not data:
         break
