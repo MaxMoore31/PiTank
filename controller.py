@@ -30,12 +30,12 @@ class TextPrint:
         self.x -= 10
         
 pygame.init()
-ch0 = 0
-ch1 = 0
-ch2 = 0
-ch3 = 0
-ch4 = 0
-ch5 = 0
+ch0 = 0 #left tread
+ch1 = 0 #right tread
+ch2 = 0 #turret
+ch3 = 0 #reverse switch
+ch4 = 0 #cam pan
+ch5 = 0 #cam tilt
 
 # Set the width and height of the screen [width,height]
 size = [500, 700]
@@ -123,7 +123,20 @@ while done==False:
         #print("ch0: ",ch0, "ch1: ",ch1)
         ch0 = str(ch0)
         ch1 = str(ch1)
-        message = str(ch0 + '/' + ch1)
+        for i in range( buttons ):
+            button = joystick.get_button( i )
+            if(i == 3 and button ==1):
+                ch3 = str(100)
+            else:
+                ch3 = str(0)
+                
+            ch2 = str(50)
+             if(i == 4 and button ==1):
+                ch2 = str(0)
+            if(i == 5 and button ==1):
+                ch2 = str(100)
+
+        message = str(ch0 + '/' + ch1 + '/' + ch2 + '/' + ch3 + '/' + ch4 + '/' + ch5)
 
         client_socket.send(message.encode()) #send message
         data = client_socket.recv(1024).decode() #receive response
@@ -136,10 +149,7 @@ while done==False:
         for i in range( buttons ):
             button = joystick.get_button( i )
             textPrint.print(screen, "Button {:>2} value: {}".format(i,button) )
-            if(i == 4 and button ==1):
-                print("DIS LEFT NUT NIGGA")
-            if(i == 5 and button ==1):
-                print("DIS RIGHT NUT NIGGA")
+
         textPrint.unindent()
         
         # Hat switch. All or nothing for direction, not like joysticks.
