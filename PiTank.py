@@ -29,7 +29,7 @@ treadRight = GPIO.PWM(40, 50) #begin PWM signal at 50Hz
 GPIO.setup(11, GPIO.OUT) #init PWM signal at 50Hz
 turretTravers = GPIO.PWM(11, 50) #begin PWM signal at 50Hz
 GPIO.setup(13, GPIO.OUT) #init PWM signal at 50Hz
-reverse = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
+reversePin = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
 
 #begin tank at idle
 dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero pwoer
@@ -68,7 +68,10 @@ def rightTreadControl(input): #pass control values the right tread, in future wi
 def reverseGear(input): #activated the right tread, in future will take argument for percentage throttle
     if(input < 50):
         dutyCyclePercentage = fullStick * 100/msPerCycle
-        reverse.start(dutyCyclePercentage)
+    else:
+        dutyCyclePercentage = deadStick * 100/msPerCycle
+    
+    reversePin.start(dutyCyclePercentage)
 
 
 while True:
