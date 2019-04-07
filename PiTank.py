@@ -57,7 +57,6 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     control = control + input
     dutyCyclePercentage = control * 100/msPerCycle
     treadLeft.start(dutyCyclePercentage)
-    print('left tread: ' + input)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
@@ -65,13 +64,11 @@ def rightTreadControl(input): #pass control values the right tread, in future wi
     control = control + input
     dutyCyclePercentage = control * 100/msPerCycle
     treadRight.start(dutyCyclePercentage)
-    print('right tread: ' + input)
-    
-    def reverse(input): #activated the right tread, in future will take argument for percentage throttle
-        if(input < 50):
-            dutyCyclePercentage = fullStick * 100/msPerCycle
-            reverse.start(dutyCyclePercentage)
-    
+
+def reverse(input): #activated the right tread, in future will take argument for percentage throttle
+    if(input < 50):
+        dutyCyclePercentage = fullStick * 100/msPerCycle
+        reverse.start(dutyCyclePercentage)
 
 
 while True:
