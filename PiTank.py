@@ -86,8 +86,10 @@ while True:
     turretRot = float(chanArray[2])
     reverse =  float(chanArray[3])
     
-    leftTreadControl(leftTreadChan)
-    rightTreadControl(rightTreadChan)
+    # leftTreadControl(leftTreadChan)
+    # rightTreadControl(rightTreadChan)
+    leftTreadOn()
+    rightTreadOn()
     reverseGear(reverse)
 
     if not data:
