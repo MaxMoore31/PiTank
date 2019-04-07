@@ -24,11 +24,11 @@ GPIO.setmode(GPIO.BOARD) #init GPIO packaged to reference board pins.
 GPIO.setwarnings(False)
 GPIO.setup(7, GPIO.OUT) #init pin 7 as output pin
 treadLeft = GPIO.PWM(7, 50) #begin PWM signal at 50Hz
-GPIO.setup(40, GPIO.OUT) #init PWM signal at 50Hz
+GPIO.setup(40, GPIO.OUT) #init pin 40
 treadRight = GPIO.PWM(40, 50) #begin PWM signal at 50Hz
-GPIO.setup(11, GPIO.OUT) #init PWM signal at 50Hz
+GPIO.setup(11, GPIO.OUT) #init pin 11
 turretTravers = GPIO.PWM(11, 50) #begin PWM signal at 50Hz
-GPIO.setup(13, GPIO.OUT) #init PWM signal at 50Hz
+GPIO.setup(13, GPIO.OUT) #init pin 13
 reversePin = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
 
 #begin tank at idle
@@ -55,7 +55,9 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     control = 0.5
     input = (input*2)/100
     control = control + input
+    print(control)
     dutyCyclePercentage = control * 100/msPerCycle
+    print(dutyCyclePercentage)
     treadLeft.start(dutyCyclePercentage)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
@@ -86,10 +88,9 @@ while True:
     turretRot = float(chanArray[2])
     reverse =  float(chanArray[3])
     
-    # leftTreadControl(leftTreadChan)
-    # rightTreadControl(rightTreadChan)
-    leftTreadOn()
-    rightTreadOn()
+    leftTreadControl(leftTreadChan)
+    rightTreadControl(rightTreadChan)
+
     reverseGear(reverse)
 
     if not data:
