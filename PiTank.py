@@ -22,14 +22,14 @@ fullStick = 2.5 #100 percent power
 deadStick = 0.5 #zero percent power
 GPIO.setmode(GPIO.BOARD) #init GPIO packaged to reference board pins.
 GPIO.setwarnings(False)
-GPIO.setup(7, GPIO.OUT) #init pin 7 as output pin
-treadLeft = GPIO.PWM(7, 50) #begin PWM signal at 50Hz
-GPIO.setup(40, GPIO.OUT) #init pin 40
-treadRight = GPIO.PWM(40, 50) #begin PWM signal at 50Hz
-GPIO.setup(11, GPIO.OUT) #init pin 11
-turretTravers = GPIO.PWM(11, 50) #begin PWM signal at 50Hz
-GPIO.setup(13, GPIO.OUT) #init pin 13
-reversePin = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
+GPIO.setup(11, GPIO.OUT) #init pin 7 as output pin
+treadLeft = GPIO.PWM(11, 50) #begin PWM signal at 50Hz
+GPIO.setup(12, GPIO.OUT) #init pin 40
+treadRight = GPIO.PWM(12, 50) #begin PWM signal at 50Hz
+GPIO.setup(13, GPIO.OUT) #init pin 11
+turretTravers = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
+GPIO.setup(15, GPIO.OUT) #init pin 13
+reversePin = GPIO.PWM(15, 50) #begin PWM signal at 50Hz
 
 #begin tank at idle
 dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero pwoer
@@ -55,9 +55,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     control = 0.5
     input = (input*2)/100
     control = control + input
-    print(control)
     dutyCyclePercentage = control * 100/msPerCycle
-    print(dutyCyclePercentage)
     treadLeft.start(dutyCyclePercentage)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
@@ -92,9 +90,13 @@ while True:
     # rightTreadControl(rightTreadChan)
     if(leftTreadChan > 0):
         leftTreadOn()
+     else:
+        leftTreadOff()
         
-    if(rightTreadChan > 5):
+    if(rightTreadChan > 0):
         rightTreadOn()
+     else:
+        rightTreadOff()
         
     reverseGear(reverse)
 
