@@ -23,9 +23,13 @@ deadStick = 0.5 #zero percent power
 GPIO.setmode(GPIO.BOARD) #init GPIO packaged to reference board pins.
 GPIO.setwarnings(False)
 GPIO.setup(7, GPIO.OUT) #init pin 7 as output pin
-l = GPIO.PWM(7, 50) #begin PWM signal at 50Hz
+treadLeft = GPIO.PWM(7, 50) #begin PWM signal at 50Hz
 GPIO.setup(40, GPIO.OUT) #init PWM signal at 50Hz
-r = GPIO.PWM(40, 50) #begin PWM signal at 50Hz
+treadRight = GPIO.PWM(40, 50) #begin PWM signal at 50Hz
+GPIO.setup(11, GPIO.OUT) #init PWM signal at 50Hz
+turretTravers = GPIO.PWM(11, 50) #begin PWM signal at 50Hz
+GPIO.setup(13, GPIO.OUT) #init PWM signal at 50Hz
+reverse = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
 
 #begin tank at idle
 dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero pwoer
@@ -35,31 +39,38 @@ r.start(dutyCyclePercentage) #right tread, zero power
 
 def leftTreadOn(): #activated the left tread, in future will take argument for percentage throttle
     dutyCyclePercentage = fullStick * 100/msPerCycle
-    l.start(dutyCyclePercentage)
+    treadLeft.start(dutyCyclePercentage)
 def rightTreadOn(): #activated the right tread, in future will take argument for percentage throttle
     dutyCyclePercentage = fullStick * 100/msPerCycle
-    r.start(dutyCyclePercentage)
+    treadRight.start(dutyCyclePercentage)
     
 def leftTreadOff(): #deactivated the left tread, in future will take argument for percentage throttle
     dutyCyclePercentage = deadStick * 100/msPerCycle
-    l.start(dutyCyclePercentage)
+    treadLeft.start(dutyCyclePercentage)
 def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
     dutyCyclePercentage = deadStick * 100/msPerCycle
-    r.start(dutyCyclePercentage)
+    treadRight.start(dutyCyclePercentage)
     
 def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
     control = 0.5
     input = (input*2)/100
     control = control + input
     dutyCyclePercentage = control * 100/msPerCycle
-    l.start(dutyCyclePercentage)
+    treadLeft.start(dutyCyclePercentage)
+    print('left tread: ' + input)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
     input = (input*2)/100
     control = control + input
     dutyCyclePercentage = control * 100/msPerCycle
-    r.start(dutyCyclePercentage)
+    treadRight.start(dutyCyclePercentage)
+    print('right tread: ' + input)
+    
+    def reverse(input): #activated the right tread, in future will take argument for percentage throttle
+    if input < 50:
+    dutyCyclePercentage = fullStick * 100/msPerCycle
+    reverse.start(dutyCyclePercentage)
     
 
 
@@ -77,6 +88,7 @@ while True:
     
     leftTreadControl(leftTreadChan)
     rightTreadControl(rightTreadChan)
+    reverse(reverse)
 
     if not data:
         break
