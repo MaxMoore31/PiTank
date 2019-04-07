@@ -33,9 +33,9 @@ reverse = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
 
 #begin tank at idle
 dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero pwoer
-l.start(dutyCyclePercentage) #left tread, zero power
+treadLeft.start(dutyCyclePercentage) #left tread, zero power
 dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero power
-r.start(dutyCyclePercentage) #right tread, zero power
+treadRight.start(dutyCyclePercentage) #right tread, zero power
 
 def leftTreadOn(): #activated the left tread, in future will take argument for percentage throttle
     dutyCyclePercentage = fullStick * 100/msPerCycle
