@@ -90,12 +90,12 @@ while True:
     # rightTreadControl(rightTreadChan)
     if(leftTreadChan > 0):
         leftTreadOn()
-     else:
+    else:
         leftTreadOff()
         
     if(rightTreadChan > 0):
         rightTreadOn()
-     else:
+    else:
         rightTreadOff()
         
     reverseGear(reverse)
