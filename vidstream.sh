@@ -1,0 +1,1 @@
+/opt/vc/bin/raspivid -t 0 -w 1280 -h 720 -hf -ih -fps 20 -o - | nc -k -l 8090
