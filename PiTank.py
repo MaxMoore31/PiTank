@@ -26,7 +26,7 @@ in2 = 23
 temp1=1
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(in1,GPIO.OUT)
+leftTreadForward.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
@@ -48,7 +48,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     print("Control ", control)
     dutyCyclePercentage = control * 100/msPerCycle
     #treadLeftForward.start(dutyCyclePercentage)
-    in1.start(input)
+    leftTreadForward.start(input)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
