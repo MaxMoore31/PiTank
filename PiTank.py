@@ -52,7 +52,8 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     dutyCyclePercentage = control * 100/msPerCycle
     #treadLeftForward.start(dutyCyclePercentage)
     GPIO.output(in2,GPIO.LOW)
-    leftTreadForward.start(input)
+    leftTreadForward.ChangeDutyCycle(input)
+    leftTreadForward.output(in1,1)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
