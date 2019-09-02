@@ -52,7 +52,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     print("Control ", control)
     dutyCyclePercentage = control * 100/msPerCycle
     #treadLeftForward.start(dutyCyclePercentage)
-    treadLeftForward.ChangeDutyCycle(dutyCyclePercentage)
+    treadLeftForward.ChangeDutyCycle(input)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
