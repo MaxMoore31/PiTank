@@ -45,14 +45,14 @@ def rightTreadOff(): #deactivated the right tread, in future will take argument 
     print("Hi im a stub")
     
 def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
-    # control = 0.5
-    # input = (input*2)/100
-    # control = control + input
-    # print("Control ", control)
-    # dutyCyclePercentage = control * 100/msPerCycle
-    # #treadLeftForward.start(dutyCyclePercentage)
-    # GPIO.output(in2,GPIO.LOW)
-    leftTreadForward.start(input)
+    control = 0.5
+    input = (input*2)/100
+    control = control + input
+    print("Control ", control)
+    dutyCyclePercentage = control * 100/msPerCycle
+    #treadLeftForward.start(dutyCyclePercentage)
+    GPIO.output(in2,GPIO.LOW)
+    leftTreadForward.start(dutyCyclePercentage)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
