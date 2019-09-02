@@ -49,6 +49,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     control = 0.5
     input = (input*2)/100
     control = control + input
+    print("Control ", control)
     dutyCyclePercentage = control * 100/msPerCycle
     treadLeftForward.start(dutyCyclePercentage)
     
