@@ -114,7 +114,7 @@ while done==False:
         textPrint.unindent()
         buttons = joystick.get_numbuttons()
         leftTread = joystick.get_axis(2)
-        rightTread = joystick.get_axis(0)
+        rightTread = joystick.get_axis(5)
         cameraPan = joystick.get_axis(3)
         #ch0 = int(abs(throttle * 100))
         #ch1 = int(abs(throttle * 100))

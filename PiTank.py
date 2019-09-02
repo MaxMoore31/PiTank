@@ -20,12 +20,12 @@ print("connection from: " + str(address))
 msPerCycle = 1000/50
 fullStick = 2.5 #100 percent power
 deadStick = 0.5 #zero percent power
-GPIO.setmode(GPIO.BOARD) #init GPIO packaged to reference board pins.
+GPIO.setmode(GPIO.BCM) #init GPIO packaged to reference GPIO pins
 GPIO.setwarnings(False)
-GPIO.setup(11, GPIO.OUT) #init pin 7 as output pin
-treadLeft = GPIO.PWM(11, 50) #begin PWM signal at 50Hz
-GPIO.setup(12, GPIO.OUT) #init pin 40
-treadRight = GPIO.PWM(12, 50) #begin PWM signal at 50Hz
+GPIO.setup(23, GPIO.OUT) #init pin 7 as output pin
+treadLeftForward = GPIO.PWM(23, 50) #begin PWM signal at 50Hz
+GPIO.setup(24, GPIO.OUT) #init pin 40
+treadRight = GPIO.PWM(24, 50) #begin PWM signal at 50Hz
 GPIO.setup(13, GPIO.OUT) #init pin 11
 turretTravers = GPIO.PWM(13, 50) #begin PWM signal at 50Hz
 GPIO.setup(15, GPIO.OUT) #init pin 13
@@ -89,7 +89,7 @@ while True:
     # leftTreadControl(leftTreadChan)
     # rightTreadControl(rightTreadChan)
     if(leftTreadChan > 0):
-        leftTreadOn()
+        leftTreadControl(leftTreadChan)
     else:
         leftTreadOff()
         
