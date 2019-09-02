@@ -23,16 +23,24 @@ deadStick = 0.5 #zero percent power
 GPIO.setmode(GPIO.BCM) #init GPIO packaged to reference GPIO pins
 in1 = 24
 in2 = 23
+in3 = 27
+in4 = 22
 temp1=1
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
+GPIO.setup(in3,GPIO.OUT)
+GPIO.setup(in4,GPIO.OUT)
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
+GPIO.output(in3,GPIO.LOW)
+GPIO.output(in4,GPIO.LOW)
 
 leftTreadForward = GPIO.PWM(in1,1)
 leftTreadBackward = GPIO.PWM(in2,1)
+rightTreadForward = GPIO.PWM(in3,1)
+rightTreadBackward = GPIO.PWM(in4,1)
 
 
 
@@ -51,11 +59,9 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
-    control = 0.5
-    input = (input*2)/100
-    control = control + input
-    dutyCyclePercentage = control * 100/msPerCycle
-    treadRight.start(dutyCyclePercentage)
+    rightTreadForward.start(True)
+    GPIO.output(in4,GPIO.LOW)
+    rightTreadForward.ChangeDutyCycle(input)
 
 def reverseGear(input): #activated the right tread, in future will take argument for percentage throttle
     if(input < 50):
