@@ -26,10 +26,12 @@ in2 = 23
 temp1=1
 
 GPIO.setmode(GPIO.BCM)
-leftTreadForward.setup(in1,GPIO.OUT)
+GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
+
+leftTreadForward = GPIO.PWM(in1,0)
 
 
 
