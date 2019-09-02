@@ -93,7 +93,7 @@ while True:
     else:
         rightTreadOff()
         
-    reverseGear(reverse)
+    #reverseGear(reverse)
 
     if not data:
         break
