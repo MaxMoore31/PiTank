@@ -31,11 +31,7 @@ GPIO.setup(in2,GPIO.OUT)
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
 
-#begin tank at idle
-dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero pwoer
-treadLeftForward.start(dutyCyclePercentage) #left tread, zero power
-dutyCyclePercentage = deadStick * 100/msPerCycle #calculate duty cycle percentage for zero power
-treadRight.start(dutyCyclePercentage) #right tread, zero power
+
 
     
 def leftTreadOff(): #deactivated the left tread, in future will take argument for percentage throttle
@@ -52,7 +48,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     print("Control ", control)
     dutyCyclePercentage = control * 100/msPerCycle
     #treadLeftForward.start(dutyCyclePercentage)
-    treadLeftForward.start(input)
+    in1.start(input)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     control = 0.5
