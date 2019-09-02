@@ -88,7 +88,7 @@ while True:
         leftTreadOff()
         
     if(rightTreadChan > 0):
-        rightTreadOn()
+        #rightTreadOn()
     else:
         rightTreadOff()
         
