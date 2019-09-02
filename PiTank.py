@@ -37,8 +37,7 @@ leftTreadForward = GPIO.PWM(in1,1)
 
     
 def leftTreadOff(): #deactivated the left tread, in future will take argument for percentage throttle
-    dutyCyclePercentage = deadStick * 100/msPerCycle
-    treadLeftForward.start(dutyCyclePercentage)
+    leftTreadForward.stop()
 def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
     #dutyCyclePercentage = deadStick * 100/msPerCycle
     #treadRight.start(dutyCyclePercentage)
