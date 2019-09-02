@@ -61,6 +61,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
     rightTreadForward.start(True)
     GPIO.output(in4,GPIO.LOW)
+    print("Rtread in " , input)
     rightTreadForward.ChangeDutyCycle(input)
 
 def reverseGear(input): #activated the right tread, in future will take argument for percentage throttle
