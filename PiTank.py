@@ -40,8 +40,9 @@ def leftTreadOff(): #deactivated the left tread, in future will take argument fo
     dutyCyclePercentage = deadStick * 100/msPerCycle
     treadLeftForward.start(dutyCyclePercentage)
 def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
-    dutyCyclePercentage = deadStick * 100/msPerCycle
-    treadRight.start(dutyCyclePercentage)
+    #dutyCyclePercentage = deadStick * 100/msPerCycle
+    #treadRight.start(dutyCyclePercentage)
+    print("Hi im a stub")
     
 def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
     control = 0.5
