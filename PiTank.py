@@ -31,7 +31,7 @@ GPIO.setup(in2,GPIO.OUT)
 GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
 
-leftTreadForward = GPIO.PWM(in1,0)
+leftTreadForward = GPIO.PWM(in1,1)
 
 
 
