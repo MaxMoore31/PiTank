@@ -32,6 +32,7 @@ GPIO.output(in1,GPIO.LOW)
 GPIO.output(in2,GPIO.LOW)
 
 leftTreadForward = GPIO.PWM(in1,1)
+leftTreadBackward = GPIO.PWM(in2,1)
 
 
 
@@ -50,6 +51,7 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     print("Control ", control)
     dutyCyclePercentage = control * 100/msPerCycle
     #treadLeftForward.start(dutyCyclePercentage)
+    GPIO.output(in2,GPIO.LOW)
     leftTreadForward.start(input)
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
