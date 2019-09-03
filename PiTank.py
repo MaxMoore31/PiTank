@@ -27,6 +27,8 @@ in3 = 27
 in4 = 22
 temp1=1
 
+GPIO.cleanup()
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
@@ -50,7 +52,7 @@ def leftTreadOff(): #deactivated the left tread, in future will take argument fo
 def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
     rightTreadForward.stop()
     
-def leftTreadControl(input, reverse): #pass control values the left tread, in future will take argument for percentage throttle
+def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
     
     # if reverse < 50:
         leftTreadForward.start(True)
@@ -66,7 +68,7 @@ def leftTreadControl(input, reverse): #pass control values the left tread, in fu
     
     
     
-def rightTreadControl(input, reverse): #pass control values the right tread, in future will take argument for percentage throttle
+def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
 #    if reverse < 50:
         rightTreadForward.start(True)
         rightTreadBackward.stop()
@@ -92,11 +94,11 @@ while True:
     reverse =  int(chanArray[3])
     print("reverse:" , reverse)
     
-    time.sleep(10)
+    #time.sleep(10)
     
-    leftTreadControl(leftTreadChan, reverse)
+    leftTreadControl(leftTreadChan)
     
-    rightTreadControl(rightTreadChan, reverse)
+    rightTreadControl(rightTreadChan)
         
     #reverseGear(reverse)
 
