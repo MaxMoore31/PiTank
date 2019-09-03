@@ -92,7 +92,7 @@ while True:
     reverse =  int(chanArray[3])
     print("reverse:" , reverse)
     
-    sleep(10)
+    time.sleep(10)
     
     leftTreadControl(leftTreadChan, reverse)
     
