@@ -56,10 +56,12 @@ def leftTreadControl(input, reverse): #pass control values the left tread, in fu
         leftTreadForward.start(True)
         GPIO.output(in2,GPIO.LOW)
         leftTreadForward.ChangeDutyCycle(input)
+        print("Left Forward")
     else:
         leftTreadBackward.start(True)
         GPIO.output(in1,GPIO.LOW)
         leftTreadBackward.ChangeDutyCycle(input)
+        print("Left Reverse")
     
     
     
@@ -69,10 +71,12 @@ def rightTreadControl(input, reverse): #pass control values the right tread, in 
         rightTreadForward.start(True)
         GPIO.output(in4,GPIO.LOW)
         rightTreadForward.ChangeDutyCycle(input)
+        print("Right Forward")
    else:
        rightTreadBackward.start(True)
        GPIO.output(in3,GPIO.LOW)
-       rightTreadForward.ChangeDutyCycle(input)
+       rightTreadBackward.ChangeDutyCycle(input)
+       print("Right Backward")
    
     
 
