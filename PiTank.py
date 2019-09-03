@@ -70,8 +70,8 @@ def leftTreadControl(input): #pass control values the left tread, in future will
     
 def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
 #    if reverse < 50:
-        rightTreadForward.start(True)
-        rightTreadBackward.stop()
+        #rightTreadForward.start(True)
+        #rightTreadBackward.stop()
         rightTreadForward.ChangeDutyCycle(input)
         print("Right Forward")
 #    if reverse > 50:
