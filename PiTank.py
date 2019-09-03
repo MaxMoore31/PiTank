@@ -54,7 +54,7 @@ def leftTreadControl(input, reverse): #pass control values the left tread, in fu
     
     # if reverse < 50:
         leftTreadForward.start(True)
-        GPIO.output(in2,GPIO.LOW)
+        leftTreadBackward.stop()
         leftTreadForward.ChangeDutyCycle(input)
         print("Left Forward")
     # if reverse > 50:
@@ -69,7 +69,7 @@ def leftTreadControl(input, reverse): #pass control values the left tread, in fu
 def rightTreadControl(input, reverse): #pass control values the right tread, in future will take argument for percentage throttle
 #    if reverse < 50:
         rightTreadForward.start(True)
-        GPIO.output(in4,GPIO.LOW)
+        rightTreadBackward.stop()
         rightTreadForward.ChangeDutyCycle(input)
         print("Right Forward")
 #    if reverse > 50:
@@ -92,7 +92,7 @@ while True:
     reverse =  int(chanArray[3])
     print("reverse:" , reverse)
     
-    
+    sleep(10)
     
     leftTreadControl(leftTreadChan, reverse)
     
