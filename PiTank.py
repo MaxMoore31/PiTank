@@ -52,12 +52,12 @@ def rightTreadOff(): #deactivated the right tread, in future will take argument 
     
 def leftTreadControl(input, reverse): #pass control values the left tread, in future will take argument for percentage throttle
     
-    if(reverse <50):
+    if(reverse < 50):
         leftTreadForward.start(True)
         GPIO.output(in2,GPIO.LOW)
         leftTreadForward.ChangeDutyCycle(input)
         print("Left Forward")
-    else:
+    if(reverse > 50):
         leftTreadBackward.start(True)
         GPIO.output(in1,GPIO.LOW)
         leftTreadBackward.ChangeDutyCycle(input)
@@ -72,22 +72,12 @@ def rightTreadControl(input, reverse): #pass control values the right tread, in 
         GPIO.output(in4,GPIO.LOW)
         rightTreadForward.ChangeDutyCycle(input)
         print("Right Forward")
-   else:
+   if(reverse > 50):
        rightTreadBackward.start(True)
        GPIO.output(in3,GPIO.LOW)
        rightTreadBackward.ChangeDutyCycle(input)
        print("Right Backward")
    
-    
-
-def reverseGear(input): #activated the right tread, in future will take argument for percentage throttle
-    if(input < 50):
-        dutyCyclePercentage = fullStick * 100/msPerCycle
-    else:
-        dutyCyclePercentage = deadStick * 100/msPerCycle
-    
-    reversePin.start(dutyCyclePercentage)
-
 
 while True:
     #recieve data stream
