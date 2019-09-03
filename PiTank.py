@@ -48,21 +48,33 @@ rightTreadBackward = GPIO.PWM(in4,1)
 def leftTreadOff(): #deactivated the left tread, in future will take argument for percentage throttle
     leftTreadForward.stop()
 def rightTreadOff(): #deactivated the right tread, in future will take argument for percentage throttle
-    #dutyCyclePercentage = deadStick * 100/msPerCycle
-    #treadRight.start(dutyCyclePercentage)
     rightTreadForward.stop()
     
-def leftTreadControl(input): #pass control values the left tread, in future will take argument for percentage throttle
-    leftTreadForward.start(True)
-    GPIO.output(in2,GPIO.LOW)
-    leftTreadForward.ChangeDutyCycle(input)
+def leftTreadControl(input, reverse): #pass control values the left tread, in future will take argument for percentage throttle
+    
+    if(reverse <50){
+        leftTreadForward.start(True)
+        GPIO.output(in2,GPIO.LOW)
+        leftTreadForward.ChangeDutyCycle(input)
+    }else{
+        leftTreadBackward.start(True)
+        GPIO.output(in1,GPIO.LOW)
+        leftTreadBackward.ChangeDutyCycle(input)
+    }
     
     
-def rightTreadControl(input): #pass control values the right tread, in future will take argument for percentage throttle
-    rightTreadForward.start(True)
-    GPIO.output(in4,GPIO.LOW)
-    print("Rtread in " , input)
-    rightTreadForward.ChangeDutyCycle(input)
+    
+def rightTreadControl(input, reverse): #pass control values the right tread, in future will take argument for percentage throttle
+   if(reverse < 50){
+        rightTreadForward.start(True)
+        GPIO.output(in4,GPIO.LOW)
+        rightTreadForward.ChangeDutyCycle(input)
+   }else{
+       rightTreadBackward.start(True)
+       GPIO.output(in3,GPIO.LOW)
+       rightTreadForward.ChangeDutyCycle(input)
+   }
+    
 
 def reverseGear(input): #activated the right tread, in future will take argument for percentage throttle
     if(input < 50):
@@ -88,12 +100,12 @@ while True:
     # leftTreadControl(leftTreadChan)
     # rightTreadControl(rightTreadChan)
     if(leftTreadChan > 0):
-        leftTreadControl(leftTreadChan)
+        leftTreadControl(leftTreadChan, reverse)
     else:
         leftTreadOff()
         
     if(rightTreadChan > 0):
-        rightTreadControl(rightTreadChan)
+        rightTreadControl(rightTreadChan, reverse)
     else:
         rightTreadOff()
         
