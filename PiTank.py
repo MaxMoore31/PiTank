@@ -39,10 +39,10 @@ GPIO.output(in2,GPIO.LOW)
 GPIO.output(in3,GPIO.LOW)
 GPIO.output(in4,GPIO.LOW)
 
-leftTreadForward = GPIO.PWM(in1,1)
-leftTreadBackward = GPIO.PWM(in2,1)
-rightTreadForward = GPIO.PWM(in3,1)
-rightTreadBackward = GPIO.PWM(in4,1)
+leftTreadForward = GPIO.PWM(in1,1000)
+leftTreadBackward = GPIO.PWM(in2,1000)
+rightTreadForward = GPIO.PWM(in3,1000)
+rightTreadBackward = GPIO.PWM(in4,1000)
 
 
 
@@ -94,8 +94,6 @@ while True:
     turretRot = float(chanArray[2])
     reverse =  int(chanArray[3])
     print("reverse:" , reverse)
-    
-    time.sleep(0.2)
     
     leftTreadControl(leftTreadChan)
     
